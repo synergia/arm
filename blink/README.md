@@ -1,6 +1,7 @@
 ### 1. Instalation
     $ sudo port install arm-elf-gcc
     $ sudo port install openocd
+    $ git clone git://libopenstm32.git.sourceforge.net/gitroot/libopenstm32/libopenstm32 
     
 ### 2. Symlink gcc binaries
     $ sudo ln -s /opt/local/bin/arm-elf-gcc-4.5.0 /opt/local/bin/arm-elf-gcc
@@ -12,25 +13,17 @@ Change
 to
     set  _WORKAREASIZE 0x4200
 
-### 4. Compile
-    make
+### 4. Edit Makefile
+Change TOOLCHAIN_DIR and OPENOCD_BASE
 
-### 5. Run openocd
-    $ openocd -f interface/jtagkey.cfg -f target/stm32.cfg
-        
-### 6. Run telnet
-    $ telnet localhost 4444
+### 5. Compile
+    $ make
+
+### 6. Run openocd
+    $ make flash
     
-### 7. Write flash (inside telnet)
-    > reset halt
-    > stm32x mass_erase 0
-    > flash probe 0
-    > flash write_bank 0 /path/to/project/out/blink.bin 0
-    > reset run
-    
-### 8. (Optional) debugger (using gdb)
+### 7. (Optional) debugger (using gdb)
     $ gdb
     (gdb) target remote localhost:3333
 E.g. read GPIOB ODR register
     (gdb) x/x 0x40010c0c
-    
