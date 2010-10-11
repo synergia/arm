@@ -1,2 +1,6 @@
 .DS_Store
-*/out/*
+*.bin
+*.hex
+*.list
+*.o
+*.srec
