@@ -1,8 +1,11 @@
 ### 1. Instalation
     $ sudo port install arm-elf-gcc
     $ sudo port install openocd
-    $ git clone git://libopenstm32.git.sourceforge.net/gitroot/libopenstm32/libopenstm32 
     
+    $ git clone git://libopenstm32.git.sourceforge.net/gitroot/libopenstm32/libopenstm32 
+    $ cd libopenstm32
+    $ make
+
 ### 2. Symlink gcc binaries
     $ sudo ln -s /opt/local/bin/arm-elf-gcc-4.5.0 /opt/local/bin/arm-elf-gcc
     $ sudo ln -s /opt/local/bin/arm-elf-g++-4.3.2 /opt/local/bin/arm-elf-g++
@@ -14,16 +17,16 @@ to
     set  _WORKAREASIZE 0x4200
 
 ### 4. Edit Makefile
-Change TOOLCHAIN_DIR and OPENOCD_BASE
+Change TOOLCHAIN_DIR (libopenstm32 path) and OPENOCD_BASE(openocd path)
 
 ### 5. Compile
     $ make
 
-### 6. Run openocd
+### 6. Flash board (with openocd)
     $ make flash
     
 ### 7. (Optional) debugger (using gdb)
     $ gdb
     (gdb) target remote localhost:3333
-E.g. read GPIOB ODR register
+E.g. read GPIOB->ODR register
     (gdb) x/x 0x40010c0c
